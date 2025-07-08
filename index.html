@@ -20,5 +20,15 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // This script is used to load the web worker
+      if (typeof Worker !== "undefined") {
+        const worker = new Worker(new URL("./worker.ts", import.meta.url), {
+          type: "module",
+        });
+        worker.postMessage("Hello from shubham");
+      } else {
+        console.error("Web Workers are not supported in this environment.");
+      }
   </body>
 </html>
